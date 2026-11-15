@@ -1,8 +1,8 @@
 services:
   mailflare:
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
+      context: https://github.com/hieunc229/mailflare.git#main
+      dockerfile: Dockerfile
     image: mailflare:local
     restart: unless-stopped
     ports:
