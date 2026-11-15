@@ -3,10 +3,30 @@ services:
     build:
       context: https://github.com/hieunc229/mailflare.git#main
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-}
     image: mailflare:local
     restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-}
+      DATABASE_AUTH_TOKEN: ${DATABASE_AUTH_TOKEN:-}
+      APP_URL: ${APP_URL:-}
+      SMTP_INBOUND_PORT: ${SMTP_INBOUND_PORT:-25}
+      MAIL_HOSTNAME: ${MAIL_HOSTNAME:-}
+      INBOUND_WEBHOOK_SECRET: ${INBOUND_WEBHOOK_SECRET:-}
+      SMTP_URL: ${SMTP_URL:-}
+      CF_ACCOUNT_ID: ${CF_ACCOUNT_ID:-}
+      CF_TOKEN: ${CF_TOKEN:-}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+      AWS_REGION: ${AWS_REGION:-}
+      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
+      AI_BASE_URL: ${AI_BASE_URL:-}
+      AI_API_KEY: ${AI_API_KEY:-}
+      AI_MODEL: ${AI_MODEL:-gpt-4o-mini}
     ports:
-      - "25:25"     # inbound SMTP (point your domain's MX here)
+      - "25:25" # inbound SMTP (point your domain's MX here)
     volumes:
       - mailflare-data:/data
 
